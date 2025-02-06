@@ -1,0 +1,72 @@
+[package]
+name = "junto"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+anchor-lang = "0.27.0"
+use anchor_lang::prelude::*;
+pub mod instructions;
+
+declare_id!("FILL_IN_YOUR_PROGRAM_ID");
+
+#[program]
+pub mod junto {
+    use super::*;
+
+    // Initializes the DAO governance account
+    pub fn initialize(ctx: Context<Initialize>) -> ProgramResult {
+        msg!("Junto: Initializing DAO Governance for Solana Memecoin");
+        Ok(())
+    }
+    
+    // Allows a user to submit a governance proposal
+    pub fn submit_proposal(ctx: Context<SubmitProposal>, proposal_data: String) -> ProgramResult {
+        msg!("Junto: Submitting Proposal: {}", proposal_data);
+        // Dummy: Append proposal_data to the DAO account proposals vector.
+        let dao_account = &mut ctx.accounts.dao_account;
+        dao_account.proposals.push(proposal_data);
+        Ok(())
+    }
+    
+    // Allows a user to vote on a proposal
+    pub fn vote(ctx: Context<Vote>, proposal_id: u64, vote: bool) -> ProgramResult {
+        msg!("Junto: Voting on Proposal ID: {}, Vote: {}", proposal_id, vote);
+        // Dummy: Append vote to the DAO account votes vector.
+        let dao_account = &mut ctx.accounts.dao_account;
+        dao_account.votes.push(vote);
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct Initialize<'info> {
+    #[account(init, payer = user, space = 8 + 64)]
+    pub dao_account: Account<'info, DaoAccount>,
+    #[account(mut)]
+    pub user: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct SubmitProposal<'info> {
+    #[account(mut)]
+    pub dao_account: Account<'info, DaoAccount>,
+    #[account(mut)]
+    pub proposer: Signer<'info>,
+}
+
+#[derive(Accounts)]
+pub struct Vote<'info> {
+    #[account(mut)]
+    pub dao_account: Account<'info, DaoAccount>,
+    #[account(mut)]
+    pub voter: Signer<'info>,
+}
+
+#[account]
+pub struct DaoAccount {
+    pub proposals: Vec<String>,
+    pub votes: Vec<bool>,
+}
+
