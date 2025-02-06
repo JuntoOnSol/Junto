@@ -1,1 +1,24 @@
+[package]
+name = "junto"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anchor-lang = "0.29.0"
+anchor-spl = "0.29.0"
+solana-program = "1.16.15"
+
+[features]
+default = ["mainnet"]
+mainnet = []
+devnet = []
+testnet = []
+
+[workspace]
+members = [
+    "programs/junto",
+]
+
+[lib]
+crate-type = ["cdylib", "lib"]
 
