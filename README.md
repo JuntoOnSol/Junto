@@ -220,8 +220,4 @@ We welcome contributors!
 
 ## **📜 License**
 Junto DAO is licensed under **MIT License**.  
-Feel free to fork, modify, and contribute!
 
----
-
-✅ **Now your README is fully detailed and professional!** 🚀 Let me know if you need modifications.
