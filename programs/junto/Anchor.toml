@@ -1,1 +1,39 @@
+[programs.localnet]
+junto = "5gPZk8WvHb27PLP1YktZMEasZrX9GJoGxLJhBydD1xkQ"
+
+[programs.devnet]
+junto = "E8r3W2Kg8R2Fr3V8fBJK22pMmFyGx72d6ShH1qBZNZAc"
+
+[programs.mainnet]
+junto = "9bC5K1V8GnqMxVzP1rY2JqLVGfG4r9H7zFhDByPJN1QD"
+
+[provider]
+cluster = "devnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "mocha -t 1000000 tests/"
+
+[features]
+seeds = true
+skip-lint = false
+
+[workspace]
+members = ["programs/junto"]
+
+[registry]
+url = "https://anchor.projectserum.com"
+
+[toolchain]
+anchor_version = "0.29.0"
+solana_version = "1.16.0"
+
+[build]
+solana_program_version = "1.16.0"
+
+[test]
+startup_wait = 5000
+
+[experiments]
+deterministic_borrowing = true
 
